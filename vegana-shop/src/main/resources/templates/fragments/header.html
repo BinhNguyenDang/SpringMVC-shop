@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header class="header-part" th:fragment= "header">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <ul class="header-info">
+              <li>
+                <i class="fas fa-envelope"></i>
+                <p>info@vegana.com</p>
+              </li>
+              <li>
+                <i class="fas fa-phone-alt"></i>
+                <p>+12027953213</p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="header-option">
+              <div class="header-lang">
+                <i class="fas fa-globe">
+                </i><select class="header-select custom-select">
+                  <option class="clr" selected>English</option>
+                  <option class="clr" value="1">Tiếng Việt</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+</body>
+</html>

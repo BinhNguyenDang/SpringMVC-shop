@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <meta
+    http-equiv="content-type"
+    content="text/html;charset=utf-8"
+  />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    
+    <meta name="author" content="mironcoder" />
+    <meta name="email" content="mironcoder@gmail.com" />
+    <meta name="profile" content="https://themeforest.net/user/mironcoder" />
+    <meta name="name" content="vegana" />
+    <meta name="title" content="vegana - organic food html template" />
+    <meta
+      name="keywords"
+      content="vegana, organic, food, shop, ecommerce, store, html, agriculture, vegetable, organic food, organic product, organic farm, organic life, organic shop, food store"
+    />
+    <title>Vegana - Checkout</title>
+    <link rel="icon" href="images/favicon.png" />
+    <link rel="stylesheet" href="fonts/flaticon/flaticon.css" />
+   	<link rel="stylesheet" href="font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/custom/main.css" />
+    <link rel="stylesheet" href="css/custom/checkout.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header th:replace="~{/fragments/header :: header}"></header>
+    <!-- Nav -->
+    <nav th:replace="~{/fragments/nav :: nav}"></nav>
+    
+    <section class="single-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="single-content">
+              <h2>Checkout</h2>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                <li class="breadcrumb-item">
+                  <a th:href="@{/products}">Product list</a>
+                </li>
+                <li class="breadcrumb-item">
+                  <a href="#">Product details</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Checkout
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="checkout-part">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="checkout-action">
+              <i class="fas fa-external-link-alt"></i
+              ><span
+                >Returning customer? <a href="#">Click here to login</a></span
+              >
+            </div>
+          </div>
+        </div>
+        <form th:action="@{/checkout}" th:object="${order}" method="post">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row checkout-form">
+                <div class="col-lg-12">
+                  <div class="check-form-title"><h3>Shipping Address</h3></div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Full name"
+                      th:field="*{receiver}"
+                      required="required"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Address"
+                      th:field="*{address}"
+                      required="required"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Phone Number"
+                      th:field="*{phone}"
+                      required="required"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Description"
+                      th:field="*{description}"
+                      required="required"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row checkout-table">
+            <div class="col-lg-12">
+              <div class="check-form-title"><h3>Confirm Order</h3></div>
+              <div class="table-scroll">
+                <table class="table-list">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Product</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="item, iState : ${cartItems}">
+                      <td class="table-number"><h5>[[${iState.index + 1}]]</h5></td>
+                      <td class="table-product">
+                        <img th:src="@{'/loadImage?imageName='+${item.product.image}}" alt="product" />
+                      </td>
+                      <td class="table-name"><h5>[[${item.product.name}]]</h5></td>
+                      <td class="table-price"><h5>[['$'+ ${#numbers.formatDecimal(item.product.price - (item.product.price * item.product.discount/100), 1, 'DEFAULT', 0, 'DEFAULT')}]]</h5></td>
+                       <td class="table-quantity" style="color: black; font-weight: bold;">
+                    	[[${item.quantity}]]
+                    </td>
+                      <td class="table-total"><h5>[['$'+${#numbers.formatDecimal((item.product.price - (item.product.price * item.product.discount/100)) * item.quantity, 1, 'DEFAULT', 0, 'DEFAULT')}]]</h5></td>
+                      <td class="table-action">
+                      <a th:href="@{/productDetail(productId=${item.product.productId})}"><i class="fas fa-eye"></i></a>
+                      
+                      <a href="#" th:data-id="${item.product.productId}" th:data-name="${item.product.name}"
+							onclick="showConfigModalDialog(this.getAttribute('data-id'), this.getAttribute('data-name'))">
+							<i class="fas fa-trash-alt"></i>
+						</a>
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+                <script>
+				function showConfigModalDialog(id, name) {
+					$('#name').text(name);
+					$('#yesOption').attr('href', '/remove/'+id);
+					$('#configmationId').modal('show');
+				}
+				</script>
+				
+				<!-- Modal -->
+				<div class="modal" tabindex="-1" role="dialog" id="configmationId">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Confirm</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>Do you want to remove this product from your shopping cart?</p>
+							</div>
+							<div class="modal-footer">
+								<a id="yesOption" type="button" class="btn btn-success">Yes</a>
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">No</button>
+							</div>
+						</div>
+					</div>
+				</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="checkout-charge">
+                <ul>
+                <li><span>Shipping Charge</span><span>$0</span></li>
+                <li><span>Total</span><span>[['$'+${#numbers.formatDecimal(totalPrice, 1, 'DEFAULT', 0, 'DEFAULT')}]]</span></li>
+              </ul>
+              </div>
+              <div class="check-order-btn">
+                <button  class="btn btn-inline" type="submit">
+                  <i class="fas fa-paper-plane"></i>
+                  <span>Place order</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section class="news-part">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-lg-6">
+            <div class="news-content"><h2>Subscribe for Latest Offers</h2></div>
+          </div>
+          <div class="col-md-7 col-lg-6">
+            <form class="search-form news-form">
+              <input type="text" placeholder="Enter Email Address" /><button
+                class="btn btn-inline"
+              >
+                <i class="fas fa-envelope"></i><span>Subscribe</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer th:replace="~{/fragments/footer :: footer}"></footer>
+    
+    <div class="footer-bottom">
+      <div class="container">
+        <p>
+          Copyright &copy; 2020. All rights reserved by -
+          <a target="_blank" href="https://themeforest.net/user/mironcoder"
+            >Mironcoder</a
+          >
+        </p>
+        <ul class="pay-card">
+          <li>
+            <a href="#"><img src="images/pay-card/01.jpg" alt="payment-1" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="images/pay-card/02.jpg" alt="payment-2" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="images/pay-card/03.jpg" alt="payment-3" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="images/pay-card/04.jpg" alt="payment-4" /></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/vendor/popper.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/custom/main.js"></script>
+  </body>
+</html>

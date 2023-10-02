@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <!-- Mirrored from mironmahmud.com/vegana/assets/ltr-version/signin-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 30 Jun 2021 04:33:04 GMT -->
+  <!-- Added by HTTrack --><meta
+    http-equiv="content-type"
+    content="text/html;charset=utf-8"
+  /><!-- /Added by HTTrack -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="author" content="mironcoder" />
+    <meta name="email" content="mironcoder@gmail.com" />
+    <meta name="profile" content="https://themeforest.net/user/mironcoder" />
+    <meta name="name" content="vegana" />
+    <meta name="title" content="vegana - organic food html template" />
+    <meta
+      name="keywords"
+      content="vegana, organic, food, shop, ecommerce, store, html, agriculture, vegetable, organic food, organic product, organic farm, organic life, organic shop, food store"
+    />
+    <title>Vegana - Login or Register</title>
+    <link rel="icon" href="images/favicon.png" />
+    <link rel="stylesheet" href="fonts/flaticon/flaticon.css" />
+    <link rel="stylesheet" href="font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/custom/main.css" />
+    <link rel="stylesheet" href="css/custom/signin-up.css" />
+  </head>
+  <body>
+    <section class="sign-part">
+      <div class="sign-content">
+        <div class="content-cover">
+          <a th:href="@{/}"><img src="images/logo.png" alt="logo" /></a>
+          <h1>Biggest online vegan food ecommerce store in worldwide.</h1>
+        </div>
+      </div>
+      <div class="sign-form">
+        <div class="back-arrow">
+          <a href="#"><img src="images/logo.png" alt="logo" /></a
+          ><a th:href="@{/}"><i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="sign-cate">
+          <ul class="nav nav-tabs">
+            <li>
+              <a href="#signin" class="nav-link active" data-toggle="tab"
+                >sign in</a
+              >
+            </li>
+            <li>
+              <a href="#signup" class="nav-link" data-toggle="tab">sign up</a>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-pane active" id="signin">
+          <div class="sign-heading">
+            <h2>Login</h2>
+            <p>Use credentials to access your account.</p>
+          </div>
+          <div class="alert alert-danger row col-12 ml-1" th:if="${error}"
+				th:text="${error}"></div>
+			<div class="alert alert-success row col-12 ml-1" th:if="${message}"
+			th:text="${message}"></div>
+          <form th:action="@{/doLogin}" method="post" class="form">
+          	<!-- id login -->
+            <label class="form-label">
+              <input type="text" name="customerId" value="" placeholder="ID Login" required="required" />
+              <small>Please follow this example - correct character</small>
+             </label>
+            <label class="form-label">
+              <input type="password" id="myPass" name="password" value="" placeholder="Password" required="required" />
+              <button type="button">
+                <a for="hide" onclick="hidePass()">
+					<i class="eye fas fa-eye"></i>
+				</a>
+               </button>
+              <small>Password must be 6 characters</small>
+            </label>
+            <label class="form-link">
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="signin-check" />
+                <label class="custom-control-label" for="signin-check">
+                  Remember me
+                </label>
+              </div>
+             	<a href="#">Forgot password?</a>
+             </label>
+            <label class="form-btn">
+              <button type="submit" value="login" class="btn btn-outline">
+                sign in now
+              </button>
+             </label>
+          </form>
+          <div class="form-bottom">
+            <p>
+              Don't have an account? click on the <span>( sign up )</span>button
+              above.
+            </p>
+          </div>
+        </div>
+        <div class="tab-pane" id="signup">
+          <div class="sign-heading">
+            <h2>Register</h2>
+            <p>Setup a new account in a minute.</p>
+          </div>
+          <ul class="form-option">
+            <li>
+            	 <!-- th:href="@{/oauth2/authorization/facebook}" -->
+              <a>
+                <i class="fab fa-facebook-f"></i><span>facebook</span>
+              </a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-twitter"></i><span>twitter</span></a>
+            </li>
+            <li>
+            	<!-- th:href="@{/oauth2/authorization/google}" -->
+              <a>
+              	<i class="fab fa-google"></i><span>google</span>
+              </a>
+            </li>
+          </ul>
+          <div class="or-text"><p>or</p></div>
+          	 <div class="alert alert-danger row col-12 ml-1" th:if="${error}"
+				th:text="${error}"></div>
+			<div class="alert alert-success row col-12 ml-1" th:if="${message}"
+				th:text="${message}"></div>
+			<form th:action="@{/registered}" th:object="${customer}" method="post" class="form">
+				<!-- Login Name -->
+				<label class="form-label">
+					<input th:field="*{customerId}" type="text" placeholder="ID Login" required="required" />
+					<small>Please follow this example - correct character</small>
+				</label>
+				<!-- Full Name -->
+				<label class="form-label">
+					<input th:field="*{fullname}" type="text" placeholder="Full Name" required="required" />
+					<small>Please follow this example - correct character</small>
+				</label>
+				<!-- Email -->
+				<label class="form-label">
+					<input th:field="*{email}" type="email" placeholder="Email" required="required" />
+					<small>Please follow this example - vegana@gmail.com</small>
+				</label>
+				<!-- Password -->
+				<label class="form-label">
+					<input th:field="*{password}" type="password" id="myPassRegister" placeholder="Password" required="required" />
+					<button type="button">
+						<a for="hide" onclick="hidePass()">
+						<i class="eye fas fa-eye"></i>
+						</a>
+					</button>
+					<small>Password must be 6 characters</small>
+				</label>
+				<div class="form-link">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="signup-check" />
+						<label class="custom-control-label" for="signup-check"> I agree to the all.</label>
+					</div>
+				</div>
+				<div class="form-btn">
+					<button type="submit" class="btn btn-outline">sign up free</button>
+				</div>
+			</form>
+			
+			<!-- show password -->
+			<script>
+				function hidePass() {
+					var x = document.getElementById("myPass");
+					if (x.type === "password") {
+						x.type = "text";
+					} else {
+						x.type = "password";
+					}
+					
+					var y = document.getElementById("myPassRegister");
+					if (y.type === "password") {
+						y.type = "text";
+					} else {
+						y.type = "password";
+					}
+				}
+			</script>
+			<div class="form-bottom">
+            <p>
+              Already have an account? click on the
+              <span>( sign in )</span>button above.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/vendor/popper.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/custom/main.js"></script>
+  </body>
+  <!-- Mirrored from mironmahmud.com/vegana/assets/ltr-version/signin-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 30 Jun 2021 04:33:05 GMT -->
+</html>

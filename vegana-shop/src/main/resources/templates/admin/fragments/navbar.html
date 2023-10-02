@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="sidebar sidebar-style-2" data-background-color="dark2" th:fragment="navbar">			
+		<div class="sidebar-wrapper scrollbar scrollbar-inner">
+			<div class="sidebar-content">
+				<div class="user">
+					<div class="avatar-sm float-left mr-2">
+						<img src="../assets/img/05.png" alt="..." class="avatar-img rounded-circle">
+					</div>
+					<div class="info">
+						<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+							<span>
+								Name : [[${customer.fullname}]]
+								<span class="user-level">Role : Administrator</span>
+								<span class="user-level">Email : [[${customer.email}]]</span>
+							</span>
+						</a>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<ul class="nav nav-primary">
+					<li class="nav-item active">
+						<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+							<i class="fas fa-home"></i>
+							<p>Home Page</p>
+							<span class="caret"></span>
+						</a>
+						<div class="collapse" id="dashboard">
+							<ul class="nav nav-collapse">
+								<li>
+									<a th:href="@{/admin/home}">
+										<span class="sub-item">Home page</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="nav-section">
+						<span class="sidebar-mini-icon">
+							<i class="fa fa-ellipsis-h"></i>
+						</span>
+						<h4 class="text-section">Components</h4>
+					</li>
+					<li class="nav-item">
+						<a data-toggle="collapse" href="#tables">
+							<i class="fas fa-table"></i>
+							<p>Management System</p>
+							<span class="caret"></span>
+						</a>
+						<div class="collapse" id="tables">
+							<ul class="nav nav-collapse">
+								<li>
+									<a th:href="@{/admin/categories}">
+										<span class="sub-item">Category Management</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/admin/suppliers}">
+										<span class="sub-item">Supplier Management</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/admin/products}">
+										<span class="sub-item">Product Management</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/admin/orders}">
+										<span class="sub-item">Order Management</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/admin/customers}">
+										<span class="sub-item">Customer Management</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a data-toggle="collapse" href="#charts">
+							<i class="far fa-chart-bar"></i>
+							<p>Statisticals</p>
+							<span class="caret"></span>
+						</a>
+						<div class="collapse" id="charts">
+							<ul class="nav nav-collapse">
+								<li>
+									<a th:href="@{/admin/reports}">
+										<span class="sub-item">Statistics by product</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/admin/reportCategory}">
+										<span class="sub-item">Statistics by category</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/admin/reportSuppliers}">
+										<span class="sub-item">Statistics by supplier</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/admin/reportYear}">
+										<span class="sub-item">Statistics by year</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/admin/reportMonth}">
+										<span class="sub-item">Statistics by month</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/admin/reportQuarter}">
+										<span class="sub-item">Statistics by quarter</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/admin/reportOrderCustomer}">
+										<span class="sub-item">Statistics by customer</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

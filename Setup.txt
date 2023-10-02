@@ -1,0 +1,12 @@
+
+Import the Project into Spring Tool Suite or Eclipse: Make sure you have Lombok installed because the project uses Lombok for generating getters and setters. Import the project into your IDE.
+
+Import the vegana_store.sql File into MySQL (Workbench 8.0): Use MySQL Workbench 8.0 or a similar tool to import the provided vegana_store.sql file.
+
+Ensure connection from MySQL is correct in PersistenceJPAConfig (change root password if needed )
+
+Admin Account: You can log in as an admin with the following credentials: Username: admin, Password: 123123.
+
+Configure Email in the application.properties File: Open the application.properties file in your project and configure the email settings as needed.
+
+Additional Notes: During registration and ordering processes, there might be a delay of 3 to 5 seconds because the project retrieves email data from the database for sending emails.

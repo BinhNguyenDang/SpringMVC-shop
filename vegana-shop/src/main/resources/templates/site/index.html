@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="author" content="mironcoder" />
+  <meta name="email" content="mironcoder@gmail.com" />
+  <meta name="profile" content="https://themeforest.net/user/mironcoder" />
+  <meta name="template" content="vegana" />
+  <meta name="title" content="vegana - organic food html template" />
+  <meta
+    name="keywords"
+    content="vegana, organic, food, shop, ecommerce, store, html, agriculture, vegetable, organic food, organic product, organic farm, organic life, organic shop, food store"
+  />
+  <title>Vegana - Home</title>
+  <link rel="icon" th:href="@{images/favicon.png}" />
+  <link rel="stylesheet" th:href="@{fonts/flaticon/flaticon.css}" />
+  <link rel="stylesheet" th:href="@{css/vendor/slick.css}" />
+  <link rel="stylesheet" th:href="@{font-awesome/5.14.0/css/all.min.css}" />
+  <link rel="stylesheet" th:href="@{css/vendor/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{css/custom/main.css}" />
+  <link rel="stylesheet" th:href="@{css/custom/index.css}" />  
+</head>
+  
+  <body>
+  	<!-- Header -->
+    <header th:replace="~{/fragments/header :: header}"></header>
+    <!-- Nav -->
+    <nav th:replace="~{/fragments/nav :: nav}"></nav>
+    
+    <section class="banner-part slider-arrow slider-dots">
+      <div class="banner-1">
+        <div class="banner-overlay">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-5 col-lg-6"></div>
+              <div class="col-md-7 col-lg-6">
+                <div class="banner-content-1">
+                  <h1>Stay healthy life with vegans food.</h1>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Esse suscipit illum nesciunt, pariatur explicabo nemo!
+                  </p>
+                  <a class="btn btn-inline" href="product-list-1.html"
+                    ><i class="fas fa-shopping-basket"></i
+                    ><span>shop now</span></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="banner-2">
+        <div class="banner-overlay">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="banner-content-2">
+                  <h1>Healthy food comes form healthy ingredients.</h1>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Esse suscipit illum nesciunt, pariatur explicabo nemo!
+                  </p>
+                  <a class="btn btn-inline" href="product-list-1.html"
+                    ><i class="fas fa-shopping-basket"></i
+                    ><span>shop now</span></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="banner-3">
+        <div class="banner-overlay">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-7 col-lg-6">
+                <div class="banner-content-3">
+                  <h1>Make your food organic and vegan.</h1>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Esse suscipit illum nesciunt, pariatur explicabo nemo!
+                  </p>
+                  <a class="btn btn-inline" href="product-list-1.html"
+                    ><i class="fas fa-shopping-basket"></i
+                    ><span>shop now</span></a
+                  >
+                </div>
+              </div>
+              <div class="col-md-5 col-lg-6"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section trend-part">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-heading">
+              <h2 class="title">Trending products</h2>
+              <a th:href="@{/products}" class="btn btn-outline"
+                ><i class="fas fa-eye"></i>show more</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="product-slider slider-arrow">
+              <div class="product-card" th:each="item : ${listTop10Product}">
+                <div class="product-img">
+                  <img th:src="@{'/loadImage?imageName='+${item.image}}" alt="product" />
+                  <ul class="product-widget">
+                    <li>
+                      <button>
+                    	<a th:href="@{/productDetail(productId=${item.productId})}">
+                     		<i class="fas fa-eye"></i>
+                     	</a>
+                      </button>
+                    </li>
+                    <li>
+                      <button>
+                      	<a th:href="@{/addToWish(productId=${item.productId})}">
+                      		<i class="fas fa-heart"></i>
+                      	</a>
+                      </button>
+                    </li>
+                    <li>
+                      <button><i class="fas fa-exchange-alt"></i></button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="product-content">
+                  <div class="product-name">
+                    <h6><a href="#" th:href="@{/productDetail(productId=${item.productId})}">[[${item.name}]]</a></h6>
+                  </div>
+                  <div class="product-price">
+                    <h6><del>[[ '$' + ${#numbers.formatDecimal(item.price, 1, 'DEFAULT', 0, 'DEFAULT')}]]</del>[['$'+ ${#numbers.formatDecimal(item.price - (item.price * item.discount/100), 1, 'DEFAULT', 0, 'DEFAULT')}]]</h6>
+                    <div class="product-rating">
+                      <i class="fas fa-star"></i><span>4.5/2</span>
+                    </div>
+                  </div>
+                  <div class="product-btn">
+                    <a th:href="@{/addToCart(productId=${item.productId})}"
+                      ><i class="fas fa-shopping-basket"></i
+                      ><span>Add to Cart</span></a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+        <section class="section new-part">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-heading">
+              <h2 class="title">New products</h2>
+              <a th:href="@{/products}" class="btn btn-outline"
+                ><i class="fas fa-eye"></i>show more</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="product-slider slider-arrow">
+              <div class="product-card" th:each="item : ${listProduct10}">
+                <div class="product-img">
+                  <img th:src="@{'/loadImage?imageName='+${item.image}}" alt="product" />
+                  <ul class="product-widget">
+                    <li>
+                      <button>
+	                      <a th:href="@{/productDetail(productId=${item.productId})}">
+	                      	<i class="fas fa-eye"></i>
+	                      </a>
+                      </button>
+                    </li>
+                    <li>
+                      <button>
+                      	<a th:href="@{/addToWish(productId=${item.productId})}">
+                      		<i class="fas fa-heart"></i>
+                      	</a>
+                      </button>
+                    </li>
+                    <li>
+                      <button><i class="fas fa-exchange-alt"></i></button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="product-content">
+                  <div class="product-name">
+                    <h6><a th:href="@{/productDetail(productId=${item.productId})}">[[${item.name}]]</a></h6>
+                  </div>
+                  <div class="product-price">
+                    <h6><del>[[ '$' + ${#numbers.formatDecimal(item.price, 1, 'DEFAULT', 0, 'DEFAULT')}]]</del>[['$'+ ${#numbers.formatDecimal(item.price - (item.price * item.discount/100), 1, 'DEFAULT', 0, 'DEFAULT')}]]</h6>
+                    <div class="product-rating">
+                      <i class="fas fa-star"></i><span>4.5/2</span>
+                    </div>
+                  </div>
+                  <div class="product-btn">
+                    <a th:href="@{/addToCart(productId=${item.productId})}">
+                      <i class="fas fa-shopping-basket"></i>
+                      <span>Add To Cart</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section best-part">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-heading">
+              <h2 class="title">Best selling products</h2>
+              <a th:href="@{/products}" class="btn btn-outline"
+                ><i class="fas fa-eye"></i>show more</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="product-slider slider-arrow">
+              <div class="product-card" th:each="item : ${listTop10Product}">
+                <div class="product-img">
+                  <img th:src="@{'/loadImage?imageName='+${item.image}}" alt="product" />
+                  <ul class="product-widget">
+                    <li>
+                      <button>
+                    	<a th:href="@{/productDetail(productId=${item.productId})}">
+                     		<i class="fas fa-eye"></i>
+                     	</a>
+                      </button>
+                    </li>
+                    <li>
+                      <button>
+                      	<a th:href="@{/addToWish(productId=${item.productId})}">
+                      		<i class="fas fa-heart"></i>
+                      	</a>
+                      </button>
+                    </li>
+                    <li>
+                      <button><i class="fas fa-exchange-alt"></i></button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="product-content">
+                  <div class="product-name">
+                    <h6><a th:href="@{/productDetail(productId=${item.productId})}">[[${item.name}]]</a></h6>
+                  </div>
+                  <div class="product-price">
+                    <h6><del>[[ '$' + ${#numbers.formatDecimal(item.price, 1, 'DEFAULT', 0, 'DEFAULT')}]]</del>[['$'+ ${#numbers.formatDecimal(item.price - (item.price * item.discount/100), 1, 'DEFAULT', 0, 'DEFAULT')}]]</h6>
+                    <div class="product-rating">
+                      <i class="fas fa-star"></i><span>4.5/2</span>
+                    </div>
+                  </div>
+                  <div class="product-btn">
+                    <a th:href="@{/addToCart(productId=${item.productId})}"
+                      ><i class="fas fa-shopping-basket"></i
+                      ><span>Add to Cart</span></a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section blog-part">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-heading">
+              <h2 class="title">Our latest blogs</h2>
+              <a href="blog-list-1.html" class="btn btn-outline"
+                ><i class="fas fa-eye"></i>show more</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-8">
+            <div class="blog-slider slider-arrow">
+              <div class="blog-card">
+                <div class="blog-img">
+                  <img src="images/blog/01.jpg" alt="blog-1" />
+                </div>
+                <div class="blog-content">
+                  <ul class="blog-meta">
+                    <li>
+                      <i class="far fa-calendar-alt"></i
+                      ><span>02 feb 2020</span>
+                    </li>
+                    <li>
+                      <i class="far fa-comments"></i><span>18 comments</span>
+                    </li>
+                  </ul>
+                  <div class="blog-text">
+                    <h3>
+                      <a href="#"
+                        >How to Make Your Breakfast Easy and Yummy...</a
+                      >
+                    </h3>
+                  </div>
+                  <div class="read-btn">
+                    <a href="#">read more <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card">
+                <div class="blog-img">
+                  <img src="images/blog/02.jpg" alt="blog-2" />
+                </div>
+                <div class="blog-content">
+                  <ul class="blog-meta">
+                    <li>
+                      <i class="far fa-calendar-alt"></i
+                      ><span>02 feb 2020</span>
+                    </li>
+                    <li>
+                      <i class="far fa-comments"></i><span>18 comments</span>
+                    </li>
+                  </ul>
+                  <div class="blog-text">
+                    <h3>
+                      <a href="#"
+                        >How to Make Your Breakfast Easy and Yummy...</a
+                      >
+                    </h3>
+                  </div>
+                  <div class="read-btn">
+                    <a href="#">read more <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card">
+                <div class="blog-img">
+                  <img src="images/blog/03.jpg" alt="blog-3" />
+                </div>
+                <div class="blog-content">
+                  <ul class="blog-meta">
+                    <li>
+                      <i class="far fa-calendar-alt"></i
+                      ><span>02 feb 2020</span>
+                    </li>
+                    <li>
+                      <i class="far fa-comments"></i><span>18 comments</span>
+                    </li>
+                  </ul>
+                  <div class="blog-text">
+                    <h3>
+                      <a href="#"
+                        >How to Make Your Breakfast Easy and Yummy...</a
+                      >
+                    </h3>
+                  </div>
+                  <div class="read-btn">
+                    <a href="#">read more <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="side-blog">
+              <div class="blog-list">
+                <div class="blog-list-img">
+                  <img src="images/blog/list-1.jpg" alt="blog-list-1" />
+                </div>
+                <div class="blog-list-content">
+                  <ul class="blog-meta">
+                    <li>
+                      <i class="far fa-calendar-alt"></i
+                      ><span>02 feb 2020</span>
+                    </li>
+                    <li>
+                      <i class="far fa-comments"></i><span>18 comments</span>
+                    </li>
+                  </ul>
+                  <div class="blog-text">
+                    <h3>
+                      <a href="#"
+                        >How to Make Your Breakfast Easy and Yummy...</a
+                      >
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-list">
+                <div class="blog-list-img">
+                  <img src="images/blog/list-2.jpg" alt="blog-list-2" />
+                </div>
+                <div class="blog-list-content">
+                  <ul class="blog-meta">
+                    <li>
+                      <i class="far fa-calendar-alt"></i
+                      ><span>02 feb 2020</span>
+                    </li>
+                    <li>
+                      <i class="far fa-comments"></i><span>18 comments</span>
+                    </li>
+                  </ul>
+                  <div class="blog-text">
+                    <h3>
+                      <a href="#"
+                        >How to Make Your Breakfast Easy and Yummy...</a
+                      >
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-list">
+                <div class="blog-list-img">
+                  <img src="images/blog/list-3.jpg" alt="blog-list-3" />
+                </div>
+                <div class="blog-list-content">
+                  <ul class="blog-meta">
+                    <li>
+                      <i class="far fa-calendar-alt"></i
+                      ><span>02 feb 2020</span>
+                    </li>
+                    <li>
+                      <i class="far fa-comments"></i><span>18 comments</span>
+                    </li>
+                  </ul>
+                  <div class="blog-text">
+                    <h3>
+                      <a href="#"
+                        >How to Make Your Breakfast Easy and Yummy...</a
+                      >
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="feature-part">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-lg-4">
+            <div class="feature-card">
+              <i class="flaticon-delivery-truck"></i>
+              <h3>Free Delivery</h3>
+              <p>
+                Tempora odio reiciendis incidunt tenetur deserunt dolores autem
+                beatae
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <div class="feature-card">
+              <i class="flaticon-save-money"></i>
+              <h3>Instant Return</h3>
+              <p>
+                Tempora odio reiciendis incidunt tenetur deserunt dolores autem
+                beatae
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <div class="feature-card">
+              <i class="flaticon-customer-service"></i>
+              <h3>Quick Support</h3>
+              <p>
+                Tempora odio reiciendis incidunt tenetur deserunt dolores autem
+                beatae
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="news-part">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-lg-6">
+            <div class="news-content"><h2>Subscribe for Latest Offers</h2></div>
+          </div>
+          <div class="col-md-7 col-lg-6">
+            <form class="search-form news-form">
+              <input type="text" placeholder="Enter Email Address" /><button
+                class="btn btn-inline"
+              >
+                <i class="fas fa-envelope"></i><span>Subscribe</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer th:replace="~{/fragments/footer :: footer}"></footer>
+    
+    <div class="footer-bottom">
+      <div class="container">
+        <p>
+          Copyright &copy; 2020 | All rights reserved by -
+          <a target="_blank" href="#"
+            >Vegana</a
+          >
+        </p>
+        <ul class="pay-card">
+          <li>
+            <a href="#"><img src="images/pay-card/01.jpg" alt="payment-1" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="images/pay-card/02.jpg" alt="payment-2" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="images/pay-card/03.jpg" alt="payment-3" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="images/pay-card/04.jpg" alt="payment-4" /></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/vendor/popper.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/slick.min.js"></script>
+    <script src="js/custom/slick.js"></script>
+    <script src="js/custom/main.js"></script>
+  </body>
+</html>

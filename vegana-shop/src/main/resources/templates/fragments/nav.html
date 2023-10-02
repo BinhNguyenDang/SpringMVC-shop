@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<nav class="navbar-part" th:fragment="nav">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="navbar-element">
+						<a class="navbar-logo" th:href="@{/}">
+							<img src="images/logo.png" alt="logo" />
+						</a>
+						<form th:action="@{/searchProduct}" class="search-form navbar-src">
+							<input type="text" name="keyword" th:value="${keyword}" placeholder="Search anything..." />
+							<button class="btn btn-inline">
+								<i class="fas fa-search"></i><span>search</span>
+							</button>
+						</form>
+						<ul class="right-widget">
+							<th:block th:if="${#request.remoteUser}">
+							<li class="navbar-item navbar-dropdown">
+								<a class="icon icon-inline" href="#">
+									<i class="fas fa-user"></i>
+								</a>
+								<ul class="dropdown-list">	
+									<li>
+										<a class="dropdown-link" th:href="@{/account}">
+											User information
+										</a>
+									</li>
+									<li>
+										<a class="dropdown-link" th:href="@{/logout}">
+											Logout
+										</a>
+									</li>
+								</ul>
+							</li>
+							</th:block>
+							
+							<li>
+								<a class="icon icon-inline" th:href="@{/wishlist}">
+									<i class="fas fa-heart"></i><sup>[[${totalCartItemWishs}]]</sup>
+								</a>
+							</li>
+							
+							<li>
+								<a class="icon icon-inline" th:href="@{/carts}">
+									<i class="fas fa-shopping-cart"></i><sup>[[${totalCartItems}]]</sup>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="navbar-slide">
+						<div class="navbar-content">
+							<ul class="navbar-list">
+								<li class="navbar-item active">
+									<a class="navbar-link" th:href="@{/}">Home</a>
+								</li>
+								<li class="navbar-item">
+									<a class="navbar-link" th:href="@{/products}">All Products</a>
+								</li>
+								<li class="navbar-item navbar-dropdown">
+			                    	<a class="navbar-link dropdown-indicator" href="#">
+			                      		<span>Categories</span>
+			                      		<i class="fas fa-chevron-down"></i>
+			                    	</a>
+				                    <ul class="dropdown-list">
+				                      <li th:each="item : ${categoryList}">
+				                        <a class="dropdown-link" th:href="@{/productByCategory(categoryId=${item.categoryId})}">
+			                          		[[${item.name}]]
+				                        </a>
+				                      </li>
+				                    </ul>
+			                 	 </li>
+			                  <li class="navbar-item navbar-dropdown">
+			                    <a class="navbar-link dropdown-indicator" href="#">
+			                      <span>Suppliers</span>
+			                      <i class="fas fa-chevron-down"></i>
+			                    </a>
+			                    <ul class="dropdown-list">
+			                      <li th:each="item : ${supplierList}">
+			                        <a class="dropdown-link" th:href="@{/productBySupplier(supplierId=${item.id})}">
+			                          [[${item.name}]]
+			                        </a>
+			                      </li>
+			                    </ul>
+			                  </li>
+			                  	<th:block th:unless="${#request.remoteUser}">
+			                  	<li class="navbar-item">
+									<a class="navbar-link" th:href="@{/login}">Login & Register</a>
+								</li>
+								</th:block>
+								<li class="navbar-item">
+									<a class="navbar-link" th:href="@{/contact}">Contact</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+</body>
+</html>

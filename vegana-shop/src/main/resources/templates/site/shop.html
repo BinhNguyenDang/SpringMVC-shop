@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />   
+    <meta name="author" content="mironcoder" />
+    <meta name="email" content="mironcoder@gmail.com" />
+    <meta name="profile" content="https://themeforest.net/user/mironcoder" />
+    <meta name="name" content="vegana" />
+    <meta name="title" content="vegana - organic food html template" />
+    <meta
+      name="keywords"
+      content="vegana, organic, food, shop, ecommerce, store, html, agriculture, vegetable, organic food, organic product, organic farm, organic life, organic shop, food store" />    
+    <title>Vegana - Products</title>
+    <link rel="icon" href="images/favicon.png" />
+    <link rel="stylesheet" href="fonts/flaticon/flaticon.css" />
+    <link rel="stylesheet" href="font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/custom/main.css" />
+    <link rel="stylesheet" href="css/custom/product-list-1.css" /> 
+  </head>
+  <body>
+    <!-- Header -->
+    <header th:replace="~{/fragments/header :: header}"></header>
+    
+    <!-- Nav -->
+    <nav th:replace="~{/fragments/nav :: nav}"></nav>
+    
+    <section class="single-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="single-content">
+              <h2>Products</h2>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Products
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="product-list">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="product-filter">
+                  <div class="product-page-number">
+                    <p>Showing Products</p>
+                  </div>
+                  <select class="product-short-select custom-select">
+                    <option selected>All Products</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row product-card-parent">
+              <div class="col-6 col-sm-6 col-md-4 col-lg-3" th:each="item : ${productList}">
+                <div class="product-card card-gape">
+                  <div class="product-img">
+                    <img th:src="@{'/loadImage?imageName='+${item.image}}" alt="product" />
+                    <ul class="product-widget">
+                      <li>
+                        <button>
+	                      <a th:href="@{/productDetail(productId=${item.productId})}">
+	                      	<i class="fas fa-eye"></i>
+	                      </a>
+                      </button>
+                      </li>
+                      <li>
+                        <button>
+                        	<a th:href="@{/addToWish(productId=${item.productId})}">
+                      		<i class="fas fa-heart"></i>
+                      	</a>
+                        </button>
+                      </li>
+                      <li>
+                        <button><i class="fas fa-exchange-alt"></i></button>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product-content">
+                    <div class="product-name">
+                      <h6><a href="#" th:href="@{/productDetail(productId=${item.productId})}">[[${item.name}]]</a></h6>
+                    </div>
+                    <div class="product-price">
+                      <h6><del>[[ '$' + ${#numbers.formatDecimal(item.price, 1, 'DEFAULT', 0, 'DEFAULT')}]]</del>[['$'+ ${#numbers.formatDecimal(item.price - (item.price * item.discount/100), 1, 'DEFAULT', 0, 'DEFAULT')}]]</h6>
+                      <div class="product-rating">
+                        <i class="fas fa-star"></i><span>4.5/2</span>
+                      </div>
+                    </div>
+                    <div class="product-btn">
+                      <a th:href="@{/addToCart(productId=${item.productId})}">
+                        <i class="fas fa-shopping-basket"></i>
+                        <span>Add To Cart</span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="pagination">
+                  <li class="page-item" th:if="${productList.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+                    <a class="page-link"
+                    	th:href="@{/products(size=${productList.size}, page=${pageNumber})}">
+                    								
+                     	<span th:text="${pageNumber}" th:class="${pageNumber==productList.number + 1} ? 'active'"></span>
+                     	
+                     </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="news-part">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-lg-6">
+            <div class="news-content"><h2>Subscribe for Latest Offers</h2></div>
+          </div>
+          <div class="col-md-7 col-lg-6">
+            <form class="search-form news-form">
+              <input type="text" placeholder="Enter Email Address" /><button
+                class="btn btn-inline"
+              >
+                <i class="fas fa-envelope"></i><span>Subscribe</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer th:replace="~{/fragments/footer :: footer}"></footer>
+    
+    <div class="footer-bottom">
+      <div class="container">
+        <p>
+          Copyright &copy; 2020. All rights reserved by -
+          <a target="_blank" href="https://themeforest.net/user/mironcoder"
+            >Mironcoder</a
+          >
+        </p>
+        <ul class="pay-card">
+          <li>
+            <a href="#"><img src="images/pay-card/01.jpg" alt="payment-1" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="images/pay-card/02.jpg" alt="payment-2" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="images/pay-card/03.jpg" alt="payment-3" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="images/pay-card/04.jpg" alt="payment-4" /></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/vendor/popper.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/jquery-ui.js"></script>
+    <script src="js/custom/price-range.js"></script>
+    <script src="js/custom/main.js"></script>
+  </body>
+  <!-- Mirrored from mironmahmud.com/vegana/assets/ltr-version/product-list-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 30 Jun 2021 04:33:08 GMT -->
+</html>
